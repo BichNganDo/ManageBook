@@ -14,7 +14,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.addServlet(new ServletHolder(new DemoServlet()), "/demo");
+        context.addServlet(new ServletHolder(new BookApiServlet()), "/api/book");
+        
+        context.addServlet(new ServletHolder(new ManageBookServlet()), "/managebook");
+        context.addServlet(new ServletHolder(new AddBookServlet()), "/addbook");
+        
 
         ContextHandler resourceHandler = new ContextHandler("/static");
         String resource = "./public";

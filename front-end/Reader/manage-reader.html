@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ManageBook</title>
+    <title>Manage Reader</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -207,7 +207,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Manage Books</p>
                                     </a>
@@ -215,7 +215,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="#" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Manage Readers</p>
                                     </a>
@@ -225,7 +225,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Manage Book Reader</p>
+                                        <p>Book Reader Management</p>
                                     </a>
                                 </li>
                             </ul>
@@ -253,7 +253,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Manage Authors</h1>
+                            <h1 class="m-0">Manage Readers</h1>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
@@ -290,7 +290,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                 <div class="col-sm-6 text-right">
                                     <a class="btn btn-primary" href="#">
-                                        <i class="fas fa-plus"></i> Add Author
+                                        <i class="fas fa-plus"></i> Add Reader
                                     </a>
                                 </div>
                             </div>
@@ -299,7 +299,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">List-Authors</h3>
+                            <h3 class="card-title">List-Readers</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                     <i class="fas fa-minus"></i>
@@ -313,20 +313,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <table class="table table-striped projects">
                                 <thead>
                                     <tr>
-                                        <th style="width: 5%">
+                                        <th style="width: 10%">
                                             Id
                                         </th>
-                                        <th style="width: 30%">
-                                            Author Name
+                                        <th style="width: 20%">
+                                            Full Name
                                         </th>
                                         <th style="width: 30%">
+                                            Address
+                                        </th>
+                                        <th style="width: 15%">
+                                            Phone Number
+                                        </th>
+                                        <th>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Nguyễn Ánh Sáng</td>
+                                        <td>10000000</td>
+                                        <td>Đỗ Thị Bích Ngân</td>
+                                        <td>78/37 Khánh Hội, P4, Q4, TPHCM</td>
+                                        <td>0935817714</td>
                                         <td class="project-actions text-right">
                                             <a class="btn btn-primary btn-sm" href="#">
                                                 <i class="fas fa-folder">
@@ -344,8 +352,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </tr>
 
                                     <tr>
-                                        <td>2</td>
-                                        <td>Tony</td>
+                                        <td>10000001</td>
+                                        <td>Trần Như Lực</td>
+                                        <td>78/37 Khánh Hội, P4, Q4, TPHCM</td>
+                                        <td>0935817714</td>
                                         <td class="project-actions text-right">
                                             <a class="btn btn-primary btn-sm" href="#">
                                                 <i class="fas fa-folder">
@@ -362,24 +372,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </td>
                                     </tr>
 
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Phan Hiệp</td>
-                                        <td class="project-actions text-right">
-                                            <a class="btn btn-primary btn-sm" href="#">
-                                                <i class="fas fa-folder">
-                                                </i> View
-                                            </a>
-                                            <a class="btn btn-info btn-sm" href="#">
-                                                <i class="fas fa-pencil-alt">
-                                                </i> Edit
-                                            </a>
-                                            <a class="btn btn-danger btn-sm" href="#">
-                                                <i class="fas fa-trash">
-                                                </i> Delete
-                                            </a>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>

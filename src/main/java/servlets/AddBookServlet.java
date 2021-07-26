@@ -1,28 +1,27 @@
 package servlets;
 
+import com.google.gson.Gson;
 import common.Config;
-import templater.PageGenerator;
-
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import templater.PageGenerator;
 
-public class DemoServlet extends HttpServlet {
+public class AddBookServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        Gson gson = new Gson();
         Map<String, Object> pageVariables = new HashMap<>();
-        pageVariables.put("app_domain", Config.APP_DOMAIN);
         pageVariables.put("static_domain", Config.STATIC_DOMAIN);
-        pageVariables.put("message", "hello word");
+        pageVariables.put("app_domain", Config.APP_DOMAIN);
+//        pageVariables.put("list_catelogy", gson.toJson(ManageCatelogyModel.getListData()));
 
-        response.setContentType("text/html;charset=UTF-8");
-        response.getWriter().println(PageGenerator.instance().getPage("page.html", pageVariables));
-
+        response.getWriter().println(PageGenerator.instance().getPage("Book/add-book.html", pageVariables));
+        response.setContentType("text/html; charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
@@ -30,4 +29,5 @@ public class DemoServlet extends HttpServlet {
 
     }
 
+    
 }
