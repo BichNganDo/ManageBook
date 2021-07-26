@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="${static_domain}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${static_domain}/style.css">
+    <title>Edit-product</title>
+    <script src="https://kit.fontawesome.com/7a117cfd83.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <nav style="margin-bottom: 30px;" class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Manage Product</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="${app_domain}/listproducts">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="${app_domain}/listcatelogy">Catelogy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <h3 class="text-center">Edit Products</h3>
+        <div class="card text-dark mb-3" style="max-width: 35rem;margin: 0 auto;">
+            <div class="card-header bg-info"><strong>General</strong></div>
+            <div style="margin: auto 20px;">
+                <div class="mb-3 mt-2">
+                    <label for="formGroupExampleInput" class="form-label"><strong>ID</strong></label>
+                    <input type="text" class="form-control" id="id">
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label"><strong>Product Name</strong></label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label"><strong>Price</strong></label>
+                    <input type="number" class="form-control" id="price">
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label"><strong>Source</strong></label>
+                    <input type="text" class="form-control" id="source">
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label"><strong>Catelogy</strong></label>
+                    <select class="form-select" aria-label="Default select example" id="idCate">
+                        <option selected>Open this select menu</option>
+                        <option value="1">Thit</option>
+                        <option value="2">Ca</option>
+                        <option value="3">Trai Cay</option>
+                        <option value="3">Rau Cu Qua</option>
+                    </select>
+                </div>
+                <button onclick="editProduct()" style="margin-bottom: 15px;margin-left: auto;display: block;" type="button" class="btn my-btn btn-success">Submit</button>
+                <a href="${app_domain}/listproducts" type="button" class="btn btn-info btn-back">Back</a>
+            </div>
+        </div>
+
+    </div>
+    <textarea id="data-edit" style="display: none;">${product}</textarea>
+    <textarea id="data-list" style="display: none;">${list_catelogy}</textarea>
+    <script src="${static_domain}/js/bootstrap.min.js"></script>
+    <script src="${static_domain}/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var products = JSON.parse(document.getElementById("data-edit").value);
+        document.getElementById("id").value = products.id
+        document.getElementById("name").value = products.name;
+        document.getElementById("price").value = products.price;
+        document.getElementById("source").value = products.source;
+        document.getElementById("idCate").value = products.idCate;
+
+        function editProduct(id, name, price, source, idCate) {
+            var id = document.getElementById("id").value;
+            var name = document.getElementById("name").value;
+            var price = document.getElementById("price").value;
+            var source = document.getElementById("source").value;
+            var idCate = document.getElementById("idCate").value;
+
+            if (id != null && name != null && price != null && source != null && idCate != null) {
+                window.location.replace("${app_domain}/api/edit?id='" + products.id + "'&name=" + name + "&price=" + price + "&source=" + source + "&idCate=" + idCate);
+
+            }
+        }
+        var catelogys = JSON.parse(document.getElementById("data-list").value);
+        console.log(catelogys);
+
+        function reloadCatelogy() {
+            var listCatelogys = document.getElementById("idCate");
+            listCatelogys.innerHTML = "";
+            for (var key in catelogys) {
+                if (catelogys.hasOwnProperty(key)) {
+                    let catelogy = catelogys[key];
+                    let newOp = document.createElement("option");
+
+                    newOp.setAttribute("value", catelogy.idCate);
+                    newOp.innerHTML = catelogy.name;
+
+                    listCatelogys.appendChild(newOp);
+                }
+            }
+        }
+        reloadCatelogy();
+    </script>
+
+
+
+</body>
+
+</html>
