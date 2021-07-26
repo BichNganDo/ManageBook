@@ -13,9 +13,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="../../public/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="${static_domain}/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../public/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="${static_domain}/dist/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -70,7 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../../public/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <img src="${static_domain}/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Brad Diesel
@@ -86,7 +86,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../../public/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                <img src="${static_domain}/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         John Pierce
@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../../public/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                <img src="${static_domain}/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Nora Silvester
@@ -164,7 +164,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="../../public/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="${static_domain}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Books Management</span>
             </a>
 
@@ -173,7 +173,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../../public/dist/img/avatar3.png" class="img-circle elevation-2" alt="User Image">
+                        <img src="${static_domain}/dist/img/avatar3.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Ngân Đỗ</a>
@@ -215,7 +215,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="${app_domain}/managereader" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Manage Readers</p>
                                     </a>
@@ -289,7 +289,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </div>
 
                                 <div class="col-sm-6 text-right">
-                                    <a class="btn btn-primary" href="#">
+                                    <a class="btn btn-primary" href="/addreader">
                                         <i class="fas fa-plus"></i> Add Reader
                                     </a>
                                 </div>
@@ -329,7 +329,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="list-readers">
                                     <tr>
                                         <td>10000000</td>
                                         <td>Đỗ Thị Bích Ngân</td>
@@ -391,11 +391,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
-    <script src="../../public/plugins/jquery/jquery.min.js"></script>
+    <script src="${static_domain}/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../public/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="../../public/dist/js/adminlte.min.js"></script>
+    <script src="${static_domain}/dist/js/adminlte.min.js"></script>
+    <script>
+        function renderListReaders(readers) {
+            var listReaders = document.getElementById("list-readers");
+
+            listReaders.innerHTML = "";
+            for (var key in readers) {
+                if (readers.hasOwnProperty(key)) {
+                    let reader = readers[key];
+                    let newTr = document.createElement("tr");
+
+                    newTr.innerHTML = `
+                                <td>` + reader.readerID + `</td>
+                                <td>` + reader.fullName + `</td>
+                                <td>` + reader.address + `</td>
+                                <td>` + reader.phoneNumber + `</td>
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm" href="#">
+                                        <i class="fas fa-folder"></i> View
+                                    </a>
+                                    <a class="btn btn-info btn-sm" href="${app_domain}/editbook?id=` + reader.id + `">
+                                        <i class="fas fa-pencil-alt"></i> Edit
+                                    </a>
+                                    <a onclick="deleteBook(` + reader.id + `)" class="btn btn-danger btn-sm" href="#">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                </td>`
+                    listReaders.appendChild(newTr);
+                }
+            }
+        }
+
+        function reloadReader() {
+            $.ajax({
+                url: "${app_domain}/api/reader",
+                type: "GET",
+                dataType: "json",
+                success(readers) {
+                    renderListReaders(readers);
+                }
+            })
+
+        }
+        reloadReader();
+    </script>
 </body>
 
 </html>

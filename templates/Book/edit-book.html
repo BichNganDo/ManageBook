@@ -310,7 +310,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <p style="color: red;" id="quantity_error"></p>
                                 </div>
                                 <div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary" id="btn-save">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -341,6 +341,84 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="../../public/js/bootstrap.bundle.min.js"></script>
         <!-- AdminLTE App -->
         <script src="../../public/dist/js/adminlte.min.js"></script>
+        <script>
+            // $("#btn-save").click(function() {
+            //     let bookName = $.trim($("#name").val());
+            //     let author = $.trim($("#author").val());
+            //     let specialization = $.trim($("#specialization").val());
+            //     let publishYear = $.trim($("#publish-year").val());
+            //     let quantity = $.trim($("#quantity").val());
+            //     let flag = true;
+
+            //     if (bookName == "" || bookName == null) {
+            //         $("#name_error").text("Bạn chưa nhập tên sách");
+            //         flag = false;
+            //     } else {
+            //         $("#name_error").text("");
+            //     }
+
+            //     if (author == "" || author == null) {
+            //         $("#author_error").text("Bạn chưa nhập tên tác giả");
+            //         flag = false;
+            //     } else {
+            //         $("#author_error").text("");
+            //     }
+
+            //     if (specialization == "" || specialization == null) {
+            //         $("specialization_error").text("Bạn chưa chọn thể loại");
+            //         flag = false;
+            //     } else {
+            //         $("#specialization_error").text("");
+            //     }
+
+            //     if (publishYear == "" || publishYear == null) {
+            //         $("#publishyear_error").text("Bạn chưa nhập năm xuất bản");
+            //         flag = false;
+            //     } else {
+            //         $("#publishyear_error").text("");
+            //     }
+
+            //     if (quantity == "" || quantity == null) {
+            //         $("#quantity_error").text("Bạn chưa nhập số lượng sách");
+            //         flag = false;
+            //     } else {
+            //         $("#quantity_error").text("");
+            //     }
+
+
+            //     if (flag) {
+            //         $.ajax({
+            //             url: "${app_domain}/api/book?action=edit",
+            //             type: "POST",
+            //             dataType: "json",
+            //             contentType: 'application/json',
+            //             data: JSON.stringify({
+            //                 bookName: bookName,
+            //                 author: author,
+            //                 specialization: specialization,
+            //                 publishYear: publishYear,
+            //                 quantity: quantity
+            //             }),
+            //             success(response) {
+            //                 console.log(response);
+            //                 if (response.errorCode >= 0) {
+            //                     showNotification("success", response.message);
+            //                     $("#name").val("");
+            //                     $("#author").val("");
+            //                     $("#specialization").val("");
+            //                     $("#publish-year").val("");
+            //                     $("#quantity").val("");
+            //                     renderListBooks();
+            //                 } else {
+            //                     showNotification("error", response.message);
+            //                 }
+
+            //             }
+            //         })
+            //     }
+            //     return flag;
+            // });
+        </script>
 </body>
 
 </html>

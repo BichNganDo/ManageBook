@@ -1,5 +1,9 @@
 package model;
 
+import controller.dataFile.BookData;
+import controller.dataFile.ReaderData;
+import java.util.ArrayList;
+
 public class Reader {
 
     private static int id = 10000000;
@@ -26,6 +30,17 @@ public class Reader {
             this.readerID = readerID;
         }
 
+        this.fullName = fullName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Reader(String fullName, String address, String phoneNumber) {
+        ArrayList<Reader> listReaders = ReaderData.INSTANCE.readReaderFromFile("READER.DAT");
+        if (listReaders.size() > 0) {
+            Reader lastReader = listReaders.get(listReaders.size() - 1);
+            this.readerID = lastReader.getReaderID() + 1;
+        }
         this.fullName = fullName;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -72,5 +87,3 @@ public class Reader {
     }
 
 }
-
-

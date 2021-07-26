@@ -207,7 +207,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="${app_domain}/managebook" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Manage Books</p>
                                     </a>
@@ -335,7 +335,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="list-books">
                                     <tr>
                                         <td>100000</td>
                                         <td>Hạt giống tâm hồn</td>
@@ -382,28 +382,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </td>
                                     </tr>
 
-                                    <tr>
-                                        <td>100002</td>
-                                        <td>Hạt giống tâm hồn</td>
-                                        <td>Ngân</td>
-                                        <td>Science</td>
-                                        <td>1999</td>
-                                        <td>1000</td>
-                                        <td class="project-actions text-right">
-                                            <a class="btn btn-primary btn-sm" href="#">
-                                                <i class="fas fa-folder">
-                                                </i> View
-                                            </a>
-                                            <a class="btn btn-info btn-sm" href="#">
-                                                <i class="fas fa-pencil-alt">
-                                                </i> Edit
-                                            </a>
-                                            <a class="btn btn-danger btn-sm" href="#">
-                                                <i class="fas fa-trash">
-                                                </i> Delete
-                                            </a>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -417,6 +395,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
@@ -425,9 +413,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- jQuery -->
     <script src="${static_domain}/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="../../public/js/bootstrap.bundle.min.js"></script>
+    <script src="${static_domain}/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="${static_domain}/dist/js/adminlte.min.js"></script>
+    <script>
+        function renderListBooks(books) {
+            var listBooks = document.getElementById("list-books");
+
+            listBooks.innerHTML = "";
+            for (var key in books) {
+                if (books.hasOwnProperty(key)) {
+                    let book = books[key];
+                    let newTr = document.createElement("tr");
+
+                    newTr.innerHTML = `
+                                <td>` + book.bookID + `</td>
+                                <td>` + book.bookName + `</td>
+                                <td>` + book.author + `</td>
+                                <td>` + book.specialization + `</td>
+                                <td>` + book.publishYear + `</td>
+                                <td>` + book.quantity + `</td>
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm" href="#">
+                                        <i class="fas fa-folder"></i> View
+                                    </a>
+                                    <a class="btn btn-info btn-sm" href="${app_domain}/editbook?id=` + book.id + `">
+                                        <i class="fas fa-pencil-alt"></i> Edit
+                                    </a>
+                                    <a onclick="deleteBook(` + book.id + `)" class="btn btn-danger btn-sm" href="#">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                </td>`
+                    listBooks.appendChild(newTr);
+                }
+            }
+        }
+
+        function reloadBook() {
+            $.ajax({
+                url: "${app_domain}/api/book",
+                type: "GET",
+                dataType: "json",
+                success(books) {
+                    renderListBooks(books);
+                }
+            })
+
+        }
+        reloadBook();
+    </script>
 </body>
 
 </html>

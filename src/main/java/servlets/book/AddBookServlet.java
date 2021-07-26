@@ -1,4 +1,4 @@
-package servlets;
+package servlets.book;
 
 import com.google.gson.Gson;
 import common.Config;
@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import templater.PageGenerator;
 
-public class ManageBookServlet extends HttpServlet {
+public class AddBookServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Gson gson = new Gson();
         Map<String, Object> pageVariables = new HashMap<>();
         pageVariables.put("static_domain", Config.STATIC_DOMAIN);
         pageVariables.put("app_domain", Config.APP_DOMAIN);
-
-        response.getWriter().println(PageGenerator.instance().getPage("Book/manage-book.html", pageVariables));
+        
         response.setContentType("text/html; charset=utf-8");
+        response.getWriter().println(PageGenerator.instance().getPage("Book/add-book.html", pageVariables));
         response.setStatus(HttpServletResponse.SC_OK);
     }
 

@@ -13,9 +13,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="../../public/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="${static_domain}/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../public/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="${static_domain}/dist/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -70,7 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../../public/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <img src="${static_domain}/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Brad Diesel
@@ -86,7 +86,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../../public/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                <img src="${static_domain}/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         John Pierce
@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../../public/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                <img src="${static_domain}/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Nora Silvester
@@ -164,7 +164,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="../../public/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="${static_domain}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Books Management</span>
             </a>
 
@@ -173,7 +173,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../../public/dist/img/avatar3.png" class="img-circle elevation-2" alt="User Image">
+                        <img src="${static_domain}/dist/img/avatar3.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Ngân Đỗ</a>
@@ -215,7 +215,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="${app_domain}/managereader" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Manage Readers</p>
                                     </a>
@@ -294,7 +294,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <p style="color: red;" id="phone_error"></p>
                                 </div>
                                 <div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-primary" id="btn-submit">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -311,11 +311,71 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- REQUIRED SCRIPTS -->
 
         <!-- jQuery -->
-        <script src="../../public/plugins/jquery/jquery.min.js"></script>
+        <script src="${static_domain}/plugins/jquery/jquery.min.js"></script>
         <!-- Bootstrap 4 -->
-        <script src="../../public/js/bootstrap.bundle.min.js"></script>
+        <script src="${static_domain}/js/bootstrap.bundle.min.js"></script>
         <!-- AdminLTE App -->
-        <script src="../../public/dist/js/adminlte.min.js"></script>
+        <script src="${static_domain}/dist/js/adminlte.min.js"></script>
+        <script>
+            $("#btn-submit").click(function() {
+                let fullName = $.trim($("#name").val());
+                let address = $.trim($("#address").val());
+                let phoneNumber = $.trim($("#phone").val());
+
+                let flag = true;
+                if (fullName == "" || fullName == null) {
+                    $("#name_error").text("Bạn chưa nhập tên người đọc");
+                    flag = false;
+                } else {
+                    $("#name_error").text("");
+                }
+
+                if (address == "" || address == null) {
+                    $("address_error").text("Bạn chưa nhập địa chỉ");
+                    flag = false;
+                } else {
+                    $("#address_error").text("");
+                }
+
+                if (phoneNumber == "" || phoneNumber == null) {
+                    $("phone_error").text("Bạn chưa nhập số điện thoại");
+                    flag = false;
+                } else {
+                    $("#phone_error").text("");
+                }
+
+
+
+                if (flag) {
+                    $.ajax({
+                        url: "${app_domain}/api/reader?action=add",
+                        type: "POST",
+                        dataType: "json",
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            fullName: fullName,
+                            address: address,
+                            phoneNumber: phoneNumber
+                        }),
+                        success(response) {
+                            console.log(response);
+                            if (response.errorCode >= 0) {
+                                showNotification("success", response.message);
+                                $("#name").val("");
+                                $("#address").val("");
+                                $("#phone").val("");
+                                window.location.replace("${app_domain}/managereader");
+                            } else {
+                                showNotification("error", response.message);
+                            }
+
+                        }
+                    })
+                }
+
+                return flag;
+            });
+        </script>
 </body>
 
 </html>

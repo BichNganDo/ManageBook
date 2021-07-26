@@ -1,5 +1,8 @@
 package model;
 
+import controller.dataFile.BookData;
+import java.util.ArrayList;
+
 public class Book {
 
     private static int id = 100000;
@@ -28,6 +31,22 @@ public class Book {
         } else {
             this.bookID = bookID;
         }
+        this.bookName = bookName;
+        this.author = author;
+        this.specialization = specialization;
+        this.publishYear = publishYear;
+        this.quantity = quantity;
+    }
+
+    public Book(String bookName, String author, String specialization,
+            int publishYear, int quantity) {
+
+        ArrayList<Book> listBooks = BookData.INSTANCE.readBooksFromFile("BOOK.DAT");
+        if (listBooks.size() > 0) {
+            Book lastBook = listBooks.get(listBooks.size() - 1);
+            this.bookID = lastBook.getBookID() + 1;
+        }
+
         this.bookName = bookName;
         this.author = author;
         this.specialization = specialization;
